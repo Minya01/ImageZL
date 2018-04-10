@@ -1,0 +1,3 @@
+rootProject.name = 'ImageZL'
+
+include ':app'
