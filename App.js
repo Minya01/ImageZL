@@ -18,6 +18,7 @@ import NavigationExperimental from 'react-native-deprecated-custom-components'
 import TabNavigator from 'react-native-tab-navigator';
 
 import Boy from './Boy'
+import ListViewTest from './ListViewTest'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -26,8 +27,7 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -58,7 +58,7 @@ export default class App extends Component<Props> {
            <View style={styles.page2}></View>
           </TabNavigator.Item>
         </TabNavigator> */}
-        <NavigationExperimental.Navigator
+        {/* <NavigationExperimental.Navigator
           initialRoute = {{
             component:Boy
           }}
@@ -66,7 +66,8 @@ export default class App extends Component<Props> {
             let Component = router.component;
             return <Component navigator={navigator} {...router.params} />
           }}
-        />
+        /> */}
+        <ListViewTest />
       </View>
     );
   }

@@ -38,8 +38,8 @@ export default class NavigatorBar extends Component {
     }
     static defaultProps = {
         statusBar: {
-            barStyle: 'light-content',
-            hidden: false
+            // barStyle: 'light-content',
+            // hide: false
         }
     }
     render() {
@@ -49,14 +49,14 @@ export default class NavigatorBar extends Component {
         let titleView = this.props.titleView
             ? this.props.titleView
             : <Text style={styles.title}>{this.props.title}</Text>
-        let content = <View style={styles.navBar}>
+        let content = <View style={[styles.navBar,this.props.style]}>
             {this.props.leftButton}
             <View style={styles.titleViewContainer}>{titleView}</View>
             {this.props.rightButton}
         </View>
 
         return (
-            <View style={[styles.container, this.props.style]}>
+            <View style={styles.container}>
                 {status}
                 {content}
             </View>
@@ -66,7 +66,6 @@ export default class NavigatorBar extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: 'gray'
     },
     navBar: {
