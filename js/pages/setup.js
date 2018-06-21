@@ -1,3 +1,6 @@
+/**
+ * 启动页
+ */
 import React,{Component} from 'react'
 
 import {
@@ -6,7 +9,8 @@ import {
     StyleSheet,
 } from 'react-native'
 
-import Navigator from 'react-native-deprecated-custom-components'
+// Navigator 在react-native 0.44已经删除
+import NavigationExperimental from 'react-native-deprecated-custom-components'
 
 import WelcomePage from './WelcomePage'
 
@@ -18,7 +22,7 @@ function setup(){
             return <Component {...route.params} navigator={navigator} />
         }
         render(){
-            return <Navigator
+            return <NavigationExperimental.Navigator
                 initialRoute={{component:WelcomePage}}
                 renderScene={(route,navigator) => this.renderScene(route,navigator)}
             />
@@ -28,4 +32,4 @@ function setup(){
     return <Root/>;
 }
 
-module.exports = setup;
+export default setup;
