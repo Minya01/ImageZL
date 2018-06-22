@@ -13,6 +13,8 @@ import {
 
 import TabNavigator from 'react-native-tab-navigator';
 
+import AlbumsPage from './AlbumsPage'
+
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -28,6 +30,7 @@ export default class HomePage extends Component {
     }
   }
   render() {
+    let {navigator} = this.props;
     return (
       <View style={styles.container}>
         <TabNavigator>
@@ -39,7 +42,7 @@ export default class HomePage extends Component {
             renderSelectedIcon={() => <Image style={[styles.image,{tintColor:'red'}]} source={require('../../res/images/ic_polular.png')} />}
             badgeText="1"
             onPress={() => this.setState({ selectedTab: 'home' })}>
-            <View style={styles.page1}></View>
+            <AlbumsPage navigator={navigator}/>
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'profile'}
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
   },
   page1:{
     flex: 1,
-    backgroundColor:'#f30'
+    backgroundColor:'#ffffff'
   },
   page2:{
     flex: 1,

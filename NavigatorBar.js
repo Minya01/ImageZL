@@ -5,7 +5,8 @@ import {
     Text,
     Image,
     View,
-    StatusBar
+    StatusBar,
+    ViewPropTypes
 } from 'react-native';
 
 import PropTypes from 'prop-types'
@@ -21,7 +22,7 @@ const StatusBarShape = {
 
 export default class NavigatorBar extends Component {
     static propTypes = {
-        style: View.propTypes.style,
+        style: ViewPropTypes.style,
         title: PropTypes.string,
         titleView: PropTypes.element,
         hide: PropTypes.bool,
