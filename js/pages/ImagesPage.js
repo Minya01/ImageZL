@@ -17,21 +17,47 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 var {height, width} = Dimensions.get('window');
 
+const ds = new ListView.DataSource({rowHasChanged:(r1, r2) => r1 != r2});
+
 export default class ImagesPage extends Component{
     constructor(props){
         super(props);
         this.state = {
             modalVisible:false,
             photos:[],
-            index:null
+            index:null,
+            dataSource:ds.cloneWithRows(this.props.albums)
         }
+    }
+    showPhotos(rowData){
+        let uri = rowData.node.image.uri;
+        if(uri){
+            return <View>
+                    <Image 
+                    style={{width:100,height:100,margin:10}}
+                    source={{ uri: uri }}
+                    />
+            </View>
+        }
+        return <View></View>
+       
     }
     getPhotos(){
         CameraRoll.getPhotos({
             first:20,
             assetType:'All'
         })
-        .then(r => this.setState({photos:r.edges}))
+        .then(r => {
+            this.setState({
+                photos:r.edges
+            })
+
+            if(r.edges){
+                this.setState({
+                    dataSource:ds.cloneWithRows(r.edges)
+                })
+            }
+        })
     }
     render(){
         let {navigator} = this.props;
@@ -47,18 +73,28 @@ export default class ImagesPage extends Component{
                 </View>
             </View>
 
-             <ScrollView>
+
+            <View>
+                <ListView 
+                    contentContainerStyle={{flexDirection:'row',flexWrap:'wrap',justifyContent:'center'}}
+                    dataSource={this.state.dataSource}
+                    renderRow={(rowData) => this.showPhotos(rowData)}
+                    enableEmptySections={true}
+                />
+            </View>
+
+            <ScrollView>
                 {this.state.photos.map((p, i) => {
-                    return (
-                        <Image
-                        key={i}
-                        style={{
-                            width: 300,
-                            height: 100,
-                        }}
-                        source={{ uri: p.node.image.uri }}
-                        />
-                    );
+                return (
+                    <Image
+                    key={i}
+                    style={{
+                        width: 100,
+                        height: 100,
+                    }}
+                    source={{ uri: p.node.image.uri }}
+                    />
+                );
                 })}
             </ScrollView>
 

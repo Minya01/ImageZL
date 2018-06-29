@@ -89,7 +89,14 @@ export default class AlbumsPage extends Component{
                                 name:album.name,
                                 component:ImagesPage,
                                 params:{
-                                    albumName:album.name
+                                    albumName:album.name,
+                                    albums:[{
+                                        node:{
+                                            image:{
+                                                uri:''
+                                            }
+                                        }
+                                    }]
                                 }
                             })
                         }} >
